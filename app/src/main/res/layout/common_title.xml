@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:background="#fff4fa"
+    >
+    <ImageView
+        android:id="@+id/img_pre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/left"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_centerVertical="true"/>
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+       android:layout_centerInParent="true"
+        android:textSize="18sp"
+        android:textColor="@color/home_back_selected"
+        android:text="首页"/>
+    <ImageView
+        android:id="@+id/img_setting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/my_setting_icon"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="16dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="16dp"
+        android:layout_centerVertical="true"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#dc2020"
+        android:layout_alignParentBottom="true"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#50ffb7b7"/>
+
+
+</RelativeLayout>

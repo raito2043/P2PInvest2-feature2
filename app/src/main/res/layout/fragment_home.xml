@@ -1,0 +1,138 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.raito.p2pinvest.fragment.HomeFragment">
+    <!--title-->
+    <include layout="@layout/common_title" />
+    <!-- TODO: Update blank fragment layout -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="150dp">
+
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/vp_banner"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                </android.support.v4.view.ViewPager>
+
+                <TextView
+                    android:id="@+id/tv_banner_info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal|bottom"
+                    android:text="bannerInfo"
+                    android:textColor="#ff0000" />
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/tv_title_product"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="6dp"
+                android:layout_marginTop="6dp"
+                android:drawablePadding="6dp"
+                android:drawableRight="@drawable/recommend"
+                android:text="易贷宝经济理财5.0"
+                android:textColor="#55667e"
+                android:textSize="26sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/home_attribute_bg"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
+                    android:text="本金保障"
+                    android:textColor="#95a0b1"
+                    android:gravity="center"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp"/>
+                <TextView
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/home_attribute_bg"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
+                    android:text="当日结算"
+                    android:textColor="#95a0b1"
+                    android:gravity="center"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"/>
+                <TextView
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/home_attribute_bg"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
+                    android:text="高额收益"
+                    android:textColor="#95a0b1"
+                    android:gravity="center"/>
+            </LinearLayout>
+            <Button
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="30dp"/>
+            <TextView
+                android:id="@+id/tv_rate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="预期年利率： 8.2%+5%"
+                android:textColor="#FF95A0B1"
+                android:textSize="14sp"
+                android:layout_gravity="center_horizontal"/>
+            <Button
+                android:id="@+id/btn_join"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="立即加入"
+                android:background="@drawable/btn_bg"
+                android:textSize="20sp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:textColor="#fff"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="全部资金由浦发银行保障"
+                android:textSize="12sp"
+                android:drawableLeft="@drawable/guarantee_icon"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="8dp"
+                android:textColor="#4d4d4d"/>
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>
