@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.raito.p2pinvest.R;
+import com.example.raito.p2pinvest.common.BaseFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -19,7 +20,7 @@ import butterknife.Unbinder;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MoreFragment extends Fragment {
+public class MoreFragment extends BaseFragment {
 
 
     @BindView(R.id.img_pre)
@@ -36,25 +37,25 @@ public class MoreFragment extends Fragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_more, container, false);
-        unbinder = ButterKnife.bind(this, view);
-        initTitle();
-        return view;
+    protected void initData() {
+
     }
 
     //初始化title
-    private void initTitle() {
+    protected void initTitle() {
         imgPre.setVisibility(View.INVISIBLE);
         imgSetting.setVisibility(View.INVISIBLE);
     }
 
     @Override
+    public int getLayoutId() {
+        return R.layout.fragment_more;
+    }
+
+    @Override
     public void onDestroyView() {
         super.onDestroyView();
-        unbinder.unbind();
+        //unbinder.unbind();
     }
 
     @OnClick({R.id.img_pre, R.id.img_setting})

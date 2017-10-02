@@ -51,4 +51,25 @@ public class UiUtils {
         float density = getContext().getResources().getDisplayMetrics().density;
         return (int) ((px / density)+0.5);
     }
+
+
+    //确保在主线程中运行
+    public static void runOnUiThread(Runnable runnable) {
+        //判断当前是否是主线程
+        if(isMainThread()){
+            runnable.run();
+
+        }else{
+            //如果不是主线程在handler中执行
+             UiUtils.getHandler().post(runnable);
+        }
+
+    }
+    //判断当前是否是主线程
+    private static boolean isMainThread() {
+
+        //MyApplication肯定是在主线程中，用MyApplication的线程和当前线程做对比
+        return MyApplication.mainThreadId == android.os.Process.myTid();
+
+    }
 }

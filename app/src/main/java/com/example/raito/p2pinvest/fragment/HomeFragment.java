@@ -1,7 +1,9 @@
 package com.example.raito.p2pinvest.fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -20,6 +22,10 @@ import com.example.raito.p2pinvest.bean.Image;
 import com.example.raito.p2pinvest.bean.Index;
 import com.example.raito.p2pinvest.bean.Product;
 import com.example.raito.p2pinvest.common.AppNetConfig;
+import com.example.raito.p2pinvest.common.BaseFragment;
+
+
+import com.example.raito.p2pinvest.view.RoundView;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.squareup.picasso.Picasso;
@@ -35,9 +41,9 @@ import butterknife.Unbinder;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class HomeFragment extends Fragment {
+public class HomeFragment extends BaseFragment {
 
-
+    private int currentProgress;
     @BindView(R.id.img_pre)
     ImageView imgPre;
     @BindView(R.id.tv_title)
@@ -56,31 +62,57 @@ public class HomeFragment extends Fragment {
     Button btnJoin;
     @BindView(R.id.cpi_banner)
     CirclePageIndicator cpiBanner;
+    @BindView(R.id.rv_round)
+    RoundView rvRound;
     private Index index;
+    private Runnable runnable = new Runnable() {
+        @Override
+        public void run() {
+            //没多久加载一点进度到最终的progress
+
+            for (int i = 1; i <= 89; i++) {
+
+                SystemClock.sleep(12);
+                rvRound.setProgress(i);
+                //休眠100毫秒
+
+                //强制重绘
+                //rvRound.invalidate();//只有主线程可以重绘
+                rvRound.postInvalidate();//主线程子线程都可以重绘
+            }
+        }
+    };
+
 
 
     public HomeFragment() {
         // Required empty public constructor
     }
 
-
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+    public void onResume() {
+        super.onResume();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                rvRound.setText(89);//模拟数据
+                SystemClock.sleep(500);
 
 
-        View view = inflater.inflate(R.layout.fragment_home, container, false);
-        unbinder = ButterKnife.bind(this, view);
+                //未联网测试动态增长round进度
+                new Thread(runnable).start();
+            }
+        }).start();
 
-        initTitle();
-        initData();
-        return view;
     }
 
 
+
+
     //初始化数据
-    private void initData() {
+    protected void initData() {
+
+
         //获取homeFragment数据 使用第三方AsyncHttpClient
         AsyncHttpClient client = new AsyncHttpClient();
 
@@ -110,8 +142,18 @@ public class HomeFragment extends Fragment {
                 List<Image> listImg = JSON.parseArray(imageArr, Image.class);
                 index.product = product;
                 index.listImg = listImg;
+
                 tvTitleProduct.setText(product.name);
                 tvRate.setText(product.yearRate + "%");
+                //将网络数据中的进度设置给控件
+                //rvRound.setProgress(89);//模拟数据
+                //currentProgress = Integer.valueOf(product.progress);//网络资源
+                //rvRound.setProgress(progress);//网络资源
+
+                //开启子线程，动态加载round控件的进度 定义Runnable变量出去
+                new Thread(runnable).start();
+
+
                 Log.i("url", "url" + product.name);
                 //设置viewPage显示
                 vpBanner.setAdapter(new MyPagerAdapter());
@@ -143,7 +185,6 @@ public class HomeFragment extends Fragment {
                     //将image添加到容器
                     container.addView(imageView);
 
-
                     return imageView;
                 }
 
@@ -170,16 +211,17 @@ public class HomeFragment extends Fragment {
     }
 
     //初始化title
-    private void initTitle() {
+    protected void initTitle() {
         imgPre.setVisibility(View.INVISIBLE);
         imgSetting.setVisibility(View.INVISIBLE);
     }
 
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        unbinder.unbind();
+    public int getLayoutId() {
+        return R.layout.fragment_home;
     }
+
+
 
     @OnClick({R.id.img_pre, R.id.img_setting})
     public void onViewClicked(View view) {

@@ -13,6 +13,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.raito.p2pinvest.R;
+import com.example.raito.p2pinvest.common.MyActivityManager;
 
 import java.lang.ref.WeakReference;
 
@@ -55,7 +56,8 @@ public class WelcomeActivity extends Activity {
     private void toActivity() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
-        finish();
+        //从栈中移除
+        MyActivityManager.getInstance().removeActivity(WelcomeActivity.this);
 
     }
 
@@ -66,6 +68,8 @@ public class WelcomeActivity extends Activity {
         // getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);//去除状态栏，全屏显示
         setContentView(R.layout.activity_welcome);
         ButterKnife.bind(this);
+        //加入到自定义栈
+        MyActivityManager.getInstance().add(WelcomeActivity.this);
         //handler = new MyHandler(this);
         //handler.sendEmptyMessageDelayed(ENTER_MAIN_ACTIVITY,2000);
         initAnim();
@@ -74,7 +78,7 @@ public class WelcomeActivity extends Activity {
     private void initAnim() {
         //初始化alpha动画
         AlphaAnimation alphaAnimation = new AlphaAnimation(0, 1);//0完全透明，1完全不透
-        alphaAnimation.setDuration(3000);//动画时间
+        alphaAnimation.setDuration(1000);//动画时间
         alphaAnimation.setInterpolator(new AccelerateInterpolator());//设置动画的变化率
         //动画监听器
         alphaAnimation.setAnimationListener(new Animation.AnimationListener() {

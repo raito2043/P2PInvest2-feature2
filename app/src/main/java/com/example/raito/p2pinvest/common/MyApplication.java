@@ -26,5 +26,7 @@ public class MyApplication extends Application {
         handler = new Handler();
         mainThread = Thread.currentThread();//实例化当前线程为主线程
         mainThreadId = android.os.Process.myTid();//获取当前线程id
+        //一旦加载进程后出现未捕获异常就会调用自定义未捕获异常处理器来处理
+        //CrashHandler.getInstanse().init();
     }
 }

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+        private int roundWidth = UiUtils.dp2px(8);//圆环宽
+        private int textSize = UiUtils.dp2px(20);//字体大小
+
+        private int roundColor = Color.argb(255,200,100,100);
+        private int roundProgressColor = Color.RED;
+        private int textColor = Color.GRAY;
+
+        private float max = 100;//圆环总大小
+        private float progress = 30;//圆环进度
+        <!--自定义属性RoundView的属性-->
+        <declare-styleable name="RoundView">
+
+                <attr name="roundWidth" format="dimension"/>
+                <attr name="textSize" format="dimension"/>
+                <attr name="roundColor" format="color"/>
+                <attr name="roundProgressColor" format="color"/>
+                <attr name="max" format="integer"/>
+                <attr name="progress" format="integer"/>
+                <attr name="textColor" format="color"/>
+
+        </declare-styleable>
+
+</resources>

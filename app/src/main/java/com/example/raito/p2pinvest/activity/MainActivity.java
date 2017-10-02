@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.raito.p2pinvest.R;
+import com.example.raito.p2pinvest.common.MyActivityManager;
 import com.example.raito.p2pinvest.fragment.HomeFragment;
 import com.example.raito.p2pinvest.fragment.InvestFragment;
 import com.example.raito.p2pinvest.fragment.MineFragment;
@@ -66,6 +67,8 @@ public class MainActivity extends FragmentActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        //添加到栈
+        MyActivityManager.getInstance().add(this);
         //初始化显示home
         setFragment(0);
     }
@@ -238,6 +241,7 @@ public class MainActivity extends FragmentActivity {
         //  handler.removeMessages(WHAT_RESET_BACK);
         //移除所有消息
         handler.removeCallbacksAndMessages(null);//为null就为所有的都被移除
+
     }
 
     private void hideFragment() {
