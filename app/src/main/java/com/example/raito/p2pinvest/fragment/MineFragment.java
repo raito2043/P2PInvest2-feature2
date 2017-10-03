@@ -1,19 +1,16 @@
 package com.example.raito.p2pinvest.fragment;
 
 
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.raito.p2pinvest.R;
 import com.example.raito.p2pinvest.common.BaseFragment;
+import com.loopj.android.http.RequestParams;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
@@ -37,7 +34,17 @@ public class MineFragment extends BaseFragment {
 
 
     @Override
-    protected void initData() {
+    protected RequestParams getParams() {
+        return null;
+    }
+
+    @Override
+    protected String getUrl() {
+        return null;
+    }
+
+    @Override
+    protected void initData(String content) {
 
     }
 

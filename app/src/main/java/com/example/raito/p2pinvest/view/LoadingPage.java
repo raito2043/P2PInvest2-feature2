@@ -3,6 +3,7 @@ package com.example.raito.p2pinvest.view;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,9 @@ import android.widget.FrameLayout;
 
 import com.example.raito.p2pinvest.R;
 import com.example.raito.p2pinvest.utils.UiUtils;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
 
 /**
  * Created by Raito on 2017/10/2.
@@ -58,7 +62,6 @@ public abstract class LoadingPage extends FrameLayout {
         }
 
 
-
         //view_error
         if (view_error == null) {
             //加载布局
@@ -77,9 +80,8 @@ public abstract class LoadingPage extends FrameLayout {
         }
 
 
-
-        //不确定此时是不是在其他线程中操作，但修改UI必须在主线程中
-        showSafePage();
+        //不确定此时是不是在其他线程中操作，但修改UI必须在主线程中，此方法必须在主线程中执行
+        showSafePage();//第一次进入时默认加载loading，后续根据状态改变
     }
 
     //保证此方法在主线程中执行，更改显示
@@ -95,7 +97,7 @@ public abstract class LoadingPage extends FrameLayout {
         });
     }
 
-    //根据状态显示界面
+    //根据状态加载布局
     private void showPage() {
         view_loading.setVisibility(state_current == STATE_LOADING ? View.VISIBLE : View.INVISIBLE);
         view_error.setVisibility(state_current == STATE_ERROR ? View.VISIBLE : View.INVISIBLE);
@@ -106,11 +108,115 @@ public abstract class LoadingPage extends FrameLayout {
             //加载view_success，非公共布局创建抽象方法待调用者实现
             view_success = UiUtils.getView(layoutId());
             //添加到frameLayout
-            addView(view_success,layoutParams);
+            addView(view_success, layoutParams);
         }
-        view_success.setVisibility(state_current == STATE_SUCCESS?View.VISIBLE:View.INVISIBLE);
+        view_success.setVisibility(state_current == STATE_SUCCESS ? View.VISIBLE : View.INVISIBLE);
     }
 
     //非公共布局创建抽象方法待调用者实现
     public abstract int layoutId();
+
+    private ResultState resultState;
+
+    //联网获取数据，此数据loadingPage不做处理，封装发送给相应布局处理显示，loadingPage只负责加载不带数据的布局
+    private void show() {
+
+        //第三方联网 异步
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.get(url(), params(), new AsyncHttpResponseHandler() {
+            //联网成功有两种状态
+            @Override
+            public void onSuccess(String content) {
+                super.onSuccess(content);
+                if (TextUtils.isEmpty(content)) {//"" && null
+
+                    //state_current = STATE_EMPTY;
+                    //封装状态和数据
+                    resultState = ResultState.EMPTY;
+                    resultState.setContent("");
+
+                } else {
+                    //state_current = STATE_SUCCESS;
+                    //封装状态和数据
+                    resultState = ResultState.SUCCESS;
+                    resultState.setContent(content);
+
+                }
+                //showSafePage();
+                //根据枚举类值设置选择加载布局,
+                loadingImg();
+                //如果有数据，加载布局，把封装好的数据发送给具体布局处理,LoadingPage只负责加载相应布局
+                if(state_current == STATE_SUCCESS){
+                    //获取联网数据状态下调用，发送封装数据&&布局给相应布局做处理
+                    onSuccessState(resultState,view_success);
+                }
+            }
+
+            //联网失败一种状态
+            @Override
+            public void onFailure(Throwable error, String content) {
+                super.onFailure(error, content);
+                //state_current = STATE_ERROR;
+                resultState = ResultState.ERROR;
+                resultState.setContent("");//避免出现空指针
+                //showSafePage();
+                //根据枚举类值设置选择加载布局
+                loadingImg();
+            }
+        });
+
+    }
+    //获取联网数据状态下调用，发送封装数据&&布局给相应布局做处理
+    protected abstract void onSuccessState(ResultState resultState, View view_success);
+
+    //根据枚举类值设置选择加载布局
+    private void loadingImg() {
+        switch (resultState) {
+            case EMPTY:
+                state_current = STATE_EMPTY;
+                break;
+            case SUCCESS:
+                state_current = STATE_SUCCESS;
+                break;
+            case ERROR:
+                state_current = STATE_ERROR;
+                break;
+        }
+        //加载布局
+        showSafePage();
+
+    }
+
+    //提供联网请求参数
+    protected abstract RequestParams params();
+
+    //提供联网请求Url
+    protected abstract String url();
+
+
+    //创建一个枚举类封装联网后的状态信息和数据
+    protected enum ResultState {
+        //状态
+        ERROR(2), EMPTY(3), SUCCESS(4);
+
+        int state;
+
+        ResultState(int state) {
+            this.state = state;
+
+        }
+
+        //数据
+        private String content;
+
+        public String getContent() {
+            return content;
+        }
+
+        public void setContent(String content) {
+            this.content = content;
+        }
+
+
+    }
 }
