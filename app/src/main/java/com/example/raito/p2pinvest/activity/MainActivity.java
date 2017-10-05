@@ -18,8 +18,8 @@ import android.widget.Toast;
 import com.example.raito.p2pinvest.R;
 import com.example.raito.p2pinvest.common.MyActivityManager;
 import com.example.raito.p2pinvest.fragment.HomeFragment;
-import com.example.raito.p2pinvest.fragment.InvestFragment;
 import com.example.raito.p2pinvest.fragment.MineFragment;
+import com.example.raito.p2pinvest.fragment.InvestFragment;
 import com.example.raito.p2pinvest.fragment.MoreFragment;
 
 import butterknife.BindView;
@@ -56,8 +56,8 @@ public class MainActivity extends FragmentActivity {
     @BindView(R.id.ll_more)
     LinearLayout llMore;
     private HomeFragment homeFragment;
-    private InvestFragment investFragment;
     private MineFragment mineFragment;
+    private InvestFragment investFragment;
     private MoreFragment moreFragment;
     private FragmentTransaction begin;
 

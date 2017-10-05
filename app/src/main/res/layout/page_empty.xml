@@ -6,5 +6,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="page_empty"
-        android:gravity="center"/>
+        android:gravity="center"
+        android:textColor="#960000"
+        android:textSize="30sp"/>
 </LinearLayout>

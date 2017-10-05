@@ -1,5 +1,6 @@
 package com.example.raito.p2pinvest.common;
 
+import android.annotation.SuppressLint;
 import android.app.Application;
 
 
@@ -14,6 +15,7 @@ import android.os.Handler;
 public class MyApplication extends Application {
 
     //在整个应用过程中提供的变量
+    @SuppressLint("StaticFieldLeak")
     public static Context context; //需要使用的上下文对象（静态内存泄露）
     public static Handler handler;  //需要使用的handler对象
     public static Thread mainThread;   //提供主线程对象

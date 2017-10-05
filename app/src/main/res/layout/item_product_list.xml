@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="180dp"
+    xmlns:roundview="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="8dp"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <TextView
+
+            android:id="@+id/title_list_product"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
+            android:text="新手福利计划"
+            android:textColor="#292929"
+            android:textSize="20sp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/left" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_height="1dp"
+            android:layout_alignParentBottom="true"
+            android:background="#ffa4a4" />
+
+    </RelativeLayout>
+    <!--content-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        >
+
+        <LinearLayout
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="20dp"
+            android:orientation="vertical">
+
+            <include layout="@layout/list_product" />
+
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_marginRight="20dp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableLeft="@drawable/manage_list_count"
+                    android:drawablePadding="4dp"
+                    android:text="100"
+                    android:drawableStart="@drawable/manage_list_count"
+                    android:layout_marginEnd="20dp" />
+
+                <TextView
+                    android:layout_marginRight="20dp"
+
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableLeft="@drawable/manage_list_guarantee"
+                    android:drawablePadding="4dp"
+                    android:text="50"
+                    android:drawableStart="@drawable/manage_list_guarantee"
+                    android:layout_marginEnd="20dp" />
+
+                <TextView
+
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableLeft="@drawable/manage_list_member"
+                    android:drawablePadding="4dp"
+                    android:text="200"
+                    android:drawableStart="@drawable/manage_list_member"
+                     />
+
+
+
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <com.example.raito.p2pinvest.view.RoundView
+            android:id="@+id/rv_list_product"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="30dp"
+            android:layout_marginTop="30dp"
+            roundview:roundWidth="4dp"
+            roundview:roundColor="#e2e2e2"
+            roundview:roundProgressColor="#ff1154"
+            roundview:progress="80"
+            roundview:max="100"
+            roundview:textSize="16sp"
+            roundview:textColor="@color/more_text"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="30dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="30dp" />
+
+    </LinearLayout>
+
+</LinearLayout>

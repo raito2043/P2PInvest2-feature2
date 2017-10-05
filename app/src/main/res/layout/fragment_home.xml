@@ -111,7 +111,7 @@
                 roundview:roundWidth="8dp"
                 roundview:roundColor="#e2e2e2"
                 roundview:roundProgressColor="#ff1154"
-                roundview:progress="49"
+                roundview:progress="80"
                 roundview:max="100"
                 roundview:textSize="20sp"
                 roundview:textColor="@color/more_text"/>

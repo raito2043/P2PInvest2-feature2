@@ -1,12 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <TextView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.example.raito.p2pinvest.view.MyTextView
+        android:id="@+id/tv_list_product"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ellipsize="marquee"
+        android:singleLine="true"
+        android:text="全部上线产品，一律五折，前一千名用户无手续费，新注册的用户可享3.5折优惠，老用户积分可兑换2.5折产品购买劵"
+        android:textColor="#ff0000"
+        android:textSize="12sp" />
+
+    <ListView
+        android:id="@+id/lv_list_product"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="全部产品"
-        android:textSize="30sp"
-        android:textColor="#840000"
-        />
+        android:layout_height="match_parent">
+
+    </ListView>
 </LinearLayout>

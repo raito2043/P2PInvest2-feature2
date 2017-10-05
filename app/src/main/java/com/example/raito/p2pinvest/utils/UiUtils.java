@@ -14,7 +14,7 @@ import com.example.raito.p2pinvest.common.MyApplication;
 public class UiUtils {
     //提供context
     public static Context getContext(){
-        return MyApplication.context;
+        return MyApplication.context;//这个上下文不是通用的 导致getView 的  TabLayout  无法使用
     }
 
     //提供handler
@@ -31,10 +31,10 @@ public class UiUtils {
     //加载返回的视图&&返回
     public static View getView(int viewID){
         return  View.inflate(getContext(),viewID,null);
-    }
+    }//View view = inflater.inflate(R.layout.fragment_blank_fragment3, container, false);
 
     //获取String构成的数组
-    public static String[] getString(int stringArrId){
+    public static String[] getStringArr(int stringArrId){
         return  getContext().getResources().getStringArray(stringArrId);
     }
 

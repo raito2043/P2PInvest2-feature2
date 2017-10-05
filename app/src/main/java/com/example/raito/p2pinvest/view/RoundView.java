@@ -43,7 +43,7 @@ public class RoundView extends View {
     private float progress ;//圆环进度
     private Paint paint;
     private int width;
-    private String text;
+    private String text = "80%";
 
     public RoundView(Context context) {
         this(context, null);
@@ -63,7 +63,7 @@ public class RoundView extends View {
         roundColor = typedArray.getColor(R.styleable.RoundView_roundColor, Color.BLACK);
         roundProgressColor= typedArray.getColor(R.styleable.RoundView_roundProgressColor, Color.YELLOW);
         max= typedArray.getInteger(R.styleable.RoundView_max, 100);
-        //progress = typedArray.getInteger(R.styleable.RoundView_progress, 10);
+        progress = typedArray.getInteger(R.styleable.RoundView_progress, 10);
         roundWidth =  typedArray.getDimension(R.styleable.RoundView_roundWidth, UiUtils.dp2px(10));
         textColor = typedArray.getColor(R.styleable.RoundView_textColor, Color.BLACK);
         textSize =  typedArray.getDimension(R.styleable.RoundView_textSize, UiUtils.dp2px(20));
@@ -89,7 +89,7 @@ public class RoundView extends View {
     }
 
     public void setText(int progress){
-        text = progress +"%";
+        //text = String.valueOf(progress) +"%";
     }
 
     //获取视图宽高

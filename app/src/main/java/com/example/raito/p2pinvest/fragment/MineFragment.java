@@ -1,36 +1,20 @@
 package com.example.raito.p2pinvest.fragment;
 
-
-import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.raito.p2pinvest.R;
 import com.example.raito.p2pinvest.common.BaseFragment;
 import com.loopj.android.http.RequestParams;
 
-import butterknife.BindView;
-import butterknife.OnClick;
-import butterknife.Unbinder;
-
 /**
- * A simple {@link Fragment} subclass.
+ * Created by Raito on 2017/10/4.
  */
+
 public class MineFragment extends BaseFragment {
 
 
-    @BindView(R.id.img_pre)
-    ImageView imgPre;
-    @BindView(R.id.tv_title)
-    TextView tvTitle;
-    @BindView(R.id.img_setting)
-    ImageView imgSetting;
-    Unbinder unbinder;
-
-    public MineFragment() {
-        // Required empty public constructor
-    }
 
 
     @Override
@@ -44,14 +28,16 @@ public class MineFragment extends BaseFragment {
     }
 
     @Override
-    protected void initData(String content) {
-
+    protected void initData(String content, View view_success) {
+        Log.i("s","到这里initData"+view_success);
+        TextView tvText=  view_success.findViewById(R.id.tv_text);
+        tvText.setText("niaho ");
+        Log.i("s","到这里");
     }
 
-    //初始化title
+    @Override
     protected void initTitle() {
-        imgPre.setVisibility(View.INVISIBLE);
-        imgSetting.setVisibility(View.INVISIBLE);
+
     }
 
     @Override
@@ -59,19 +45,8 @@ public class MineFragment extends BaseFragment {
         return R.layout.fragment_mine;
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        //unbinder.unbind();
-    }
 
-    @OnClick({R.id.img_pre, R.id.img_setting})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.img_pre:
-                break;
-            case R.id.img_setting:
-                break;
-        }
-    }
+
+
+
 }

@@ -1,14 +1,12 @@
 package com.example.raito.p2pinvest.fragment;
 
 
-import android.content.Intent;
-import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.text.TextUtils;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -21,13 +19,10 @@ import com.example.raito.p2pinvest.R;
 import com.example.raito.p2pinvest.bean.Image;
 import com.example.raito.p2pinvest.bean.Index;
 import com.example.raito.p2pinvest.bean.Product;
-import com.example.raito.p2pinvest.common.AppNetConfig;
 import com.example.raito.p2pinvest.common.BaseFragment;
 
 
 import com.example.raito.p2pinvest.view.RoundView;
-import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.squareup.picasso.Picasso;
 import com.viewpagerindicator.CirclePageIndicator;
@@ -35,7 +30,6 @@ import com.viewpagerindicator.CirclePageIndicator;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
@@ -108,9 +102,7 @@ public class HomeFragment extends BaseFragment {
 
        }
 
-
     }
-
 
     @Override
     protected RequestParams getParams() {
@@ -119,19 +111,22 @@ public class HomeFragment extends BaseFragment {
 
     @Override
     protected String getUrl() {
-        return  AppNetConfig.INDEX;
+        return  null;
     }
 
 
 
     //初始化数据
     @Override
-    protected void initData(String content) {
+    protected void initData(String content, View view_success) {
 
 
+        if(!TextUtils.isEmpty(content)){//不为空
 
-        //解析数据&&显示数据
-        parseDataAndShow(content);
+            //解析数据&&显示数据
+            parseDataAndShow(content);
+
+        }
 
      /*   //获取homeFragment数据 使用第三方AsyncHttpClient
         AsyncHttpClient client = new AsyncHttpClient();
@@ -235,9 +230,6 @@ public class HomeFragment extends BaseFragment {
             return view == object;
         }
     }
-
-
-
 
     //初始化title
     @Override

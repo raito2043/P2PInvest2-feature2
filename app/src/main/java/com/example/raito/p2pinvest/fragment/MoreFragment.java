@@ -44,7 +44,7 @@ public class MoreFragment extends BaseFragment {
     }
 
     @Override
-    protected void initData(String content) {
+    protected void initData(String contents, View view_success) {
 
     }
 
@@ -59,11 +59,7 @@ public class MoreFragment extends BaseFragment {
         return R.layout.fragment_more;
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        //unbinder.unbind();
-    }
+
 
     @OnClick({R.id.img_pre, R.id.img_setting})
     public void onViewClicked(View view) {

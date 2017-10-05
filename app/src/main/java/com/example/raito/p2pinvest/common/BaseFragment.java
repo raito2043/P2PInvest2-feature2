@@ -2,11 +2,15 @@ package com.example.raito.p2pinvest.common;
 
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 
+import com.example.raito.p2pinvest.R;
+import com.example.raito.p2pinvest.utils.UiUtils;
 import com.example.raito.p2pinvest.view.LoadingPage;
 import com.loopj.android.http.RequestParams;
 
@@ -19,18 +23,24 @@ import butterknife.Unbinder;
  */
 
 public abstract class BaseFragment extends android.support.v4.app.Fragment {
-    private Unbinder unbinder;
 
+    private LoadingPage loadingPager;
+    private Unbinder unbinde;
+
+
+    //加载视图
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
+        //View view = inflater.inflate(R.layout.fragment_invest, container, false);
 
         //View view = inflater.inflate(getLayoutId(), container, false);
         //使用loadingPage动态加载视图
+        //加载LoadingPager
+        loadingPager = new LoadingPage(container.getContext()) {
 
-        return new LoadingPage(container.getContext()) {
             @Override
             public int layoutId() {
                 return getLayoutId();
@@ -38,10 +48,13 @@ public abstract class BaseFragment extends android.support.v4.app.Fragment {
 
             @Override
             protected void onSuccessState(ResultState resultState, View view_success) {
-                unbinder = ButterKnife.bind(BaseFragment.this, view_success);
+                Log.i("s","到这里onSuccessState"+view_success);
+                //百度
+                unbinde = ButterKnife.bind(BaseFragment.this, view_success);
                 //将封装的数据继续传给相应布局
                 initTitle();
-                initData(resultState.getContent());
+                initData(resultState.getContent(),view_success);
+
             }
 
             @Override
@@ -54,6 +67,27 @@ public abstract class BaseFragment extends android.support.v4.app.Fragment {
                 return getUrl();
             }
         };
+
+        return loadingPager;
+    }
+
+
+    //onActivityCreated 在 onCreateView后调用
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        //模拟联网操作的延迟
+      /*  UiUtils.getHandler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //视图加载好后加载数据
+
+            }
+        }, 2000);*/
+        loadingPager.show();
+
+
     }
 
     protected abstract RequestParams getParams();
@@ -61,7 +95,7 @@ public abstract class BaseFragment extends android.support.v4.app.Fragment {
     protected abstract String getUrl();
 
     //初始化数据
-    protected abstract void initData(String content);
+    protected abstract void initData(String content, View view_success);
 
     //初始化标题
     protected abstract void initTitle();
@@ -72,7 +106,7 @@ public abstract class BaseFragment extends android.support.v4.app.Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        unbinder.unbind();
-    }
+        unbinde.unbind();
 
+    }
 }

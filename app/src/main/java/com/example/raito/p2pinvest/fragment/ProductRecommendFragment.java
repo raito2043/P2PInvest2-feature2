@@ -1,5 +1,7 @@
 package com.example.raito.p2pinvest.fragment;
 
+import android.view.View;
+
 import com.example.raito.p2pinvest.R;
 import com.example.raito.p2pinvest.common.BaseFragment;
 import com.loopj.android.http.RequestParams;
@@ -21,7 +23,7 @@ public class ProductRecommendFragment extends BaseFragment {
     }
 
     @Override
-    protected void initData(String content) {
+    protected void initData(String content, View view_success) {
 
     }
 

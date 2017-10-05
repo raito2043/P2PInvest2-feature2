@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -14,6 +15,8 @@ import com.example.raito.p2pinvest.utils.UiUtils;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+
+import org.w3c.dom.Text;
 
 /**
  * Created by Raito on 2017/10/2.
@@ -26,7 +29,7 @@ public abstract class LoadingPage extends FrameLayout {
     private static final int STATE_ERROR = 2;
     private static final int STATE_EMPTY = 3;
     private static final int STATE_SUCCESS = 4;
-    private int state_current = STATE_LOADING;//每个状态都不同的一个变量,默认情况下为加载
+    private int state_current = STATE_SUCCESS;//每个状态都不同的一个变量,默认情况下为加载
     //四种显示界面
     private View view_loading;
     private View view_error;
@@ -106,9 +109,11 @@ public abstract class LoadingPage extends FrameLayout {
         //view_success
         if (view_success == null) {
             //加载view_success，非公共布局创建抽象方法待调用者实现
-            view_success = UiUtils.getView(layoutId());
+            //view_success = UiUtils.getView(layoutId());
+            view_success = View.inflate(getContext(),layoutId(),null);
             //添加到frameLayout
             addView(view_success, layoutParams);
+            Log.i("s","到这里view_success"+view_success);
         }
         view_success.setVisibility(state_current == STATE_SUCCESS ? View.VISIBLE : View.INVISIBLE);
     }
@@ -119,11 +124,19 @@ public abstract class LoadingPage extends FrameLayout {
     private ResultState resultState;
 
     //联网获取数据，此数据loadingPage不做处理，封装发送给相应布局处理显示，loadingPage只负责加载不带数据的布局
-    private void show() {
+    public void show() {
+        String url = url();
+        if (TextUtils.isEmpty(url)) {
+            resultState = ResultState.SUCCESS;
+            resultState.setContent("");
+            loadingImg();//修改state_current，并且决定加载哪个页面：showSafePage()
+            return;
+        }
+
 
         //第三方联网 异步
         AsyncHttpClient client = new AsyncHttpClient();
-        client.get(url(), params(), new AsyncHttpResponseHandler() {
+        client.get(url, params(), new AsyncHttpResponseHandler() {
             //联网成功有两种状态
             @Override
             public void onSuccess(String content) {
@@ -134,7 +147,7 @@ public abstract class LoadingPage extends FrameLayout {
                     //封装状态和数据
                     resultState = ResultState.EMPTY;
                     resultState.setContent("");
-
+                    Log.i("s","到这里state_current == STATE_SUCCESS"+view_success);
                 } else {
                     //state_current = STATE_SUCCESS;
                     //封装状态和数据
@@ -145,11 +158,7 @@ public abstract class LoadingPage extends FrameLayout {
                 //showSafePage();
                 //根据枚举类值设置选择加载布局,
                 loadingImg();
-                //如果有数据，加载布局，把封装好的数据发送给具体布局处理,LoadingPage只负责加载相应布局
-                if(state_current == STATE_SUCCESS){
-                    //获取联网数据状态下调用，发送封装数据&&布局给相应布局做处理
-                    onSuccessState(resultState,view_success);
-                }
+
             }
 
             //联网失败一种状态
@@ -161,7 +170,9 @@ public abstract class LoadingPage extends FrameLayout {
                 resultState.setContent("");//避免出现空指针
                 //showSafePage();
                 //根据枚举类值设置选择加载布局
+
                 loadingImg();
+
             }
         });
 
@@ -184,6 +195,16 @@ public abstract class LoadingPage extends FrameLayout {
         }
         //加载布局
         showSafePage();
+
+
+        //如果有数据，加载布局，把封装好的数据发送给具体布局处理,LoadingPage只负责加载相应布局
+        if(state_current == STATE_SUCCESS){
+            Log.i("s","到这里state_current == STATE_SUCCESS"+view_success);
+            //获取联网数据状态下调用，发送封装数据&&布局给相应布局做处理
+            onSuccessState(resultState,view_success);
+
+        }
+
 
     }
 
