@@ -14,9 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.raito.p2pinvest.R;
-import com.example.raito.p2pinvest.common.BaseFragment;
 import com.example.raito.p2pinvest.utils.UiUtils;
-import com.loopj.android.http.RequestParams;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,8 +27,7 @@ import butterknife.Unbinder;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class InvestFragment extends BaseFragment {
-
+public class InvestFragment extends Fragment {
 
 
 
@@ -44,6 +41,7 @@ public class InvestFragment extends BaseFragment {
     TabLayout vpTabLayout;
     @BindView(R.id.vp_invest)
     ViewPager vpInvest;
+    Unbinder unbinder;
 
     private String[] mTitles;
 
@@ -54,21 +52,23 @@ public class InvestFragment extends BaseFragment {
 
 
     @Override
-    protected RequestParams getParams() {
-        return null;
-    }
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_invest, container, false);
+        unbinder = ButterKnife.bind(this, view);
+        initData();
 
-    @Override
-    protected String getUrl() {
-        return null;
+
+        return view;
+
     }
 
     //TabLayout Design包
-    @Override
-    protected void initData(String content, View view_success) {
+
+    protected void initData() {
         //mTitles = new String[]{"全部理财", "推荐理财", "热门理财"};
         //1.加载三个不同的Fragment：ProductListFragment,ProductRecommendFragment,ProductHotFragment.
         initFragments();
+        initTitle();
         //2.ViewPager设置三个Fragment的显示
         MyAdapter adapter = new MyAdapter(getChildFragmentManager());
         vpInvest.setAdapter(adapter);
@@ -78,8 +78,6 @@ public class InvestFragment extends BaseFragment {
 
 
     }
-
-
 
 
     private List<Fragment> fragmentList = new ArrayList<>();
@@ -105,10 +103,10 @@ public class InvestFragment extends BaseFragment {
     }
 
     @Override
-    public int getLayoutId() {
-        return R.layout.fragment_invest;
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
     }
-
 
 
     /**

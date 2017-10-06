@@ -43,7 +43,7 @@ public class RoundView extends View {
     private float progress ;//圆环进度
     private Paint paint;
     private int width;
-    private String text = "80%";
+    private String text = "00%";
 
     public RoundView(Context context) {
         this(context, null);

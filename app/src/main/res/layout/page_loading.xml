@@ -7,14 +7,16 @@
     android:orientation="vertical">
 
     <ProgressBar
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_width="100dp"
+        android:layout_height="110dp"
+        android:indeterminateDrawable="@drawable/laoding_anim"/>
+
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="努力加载中..."
-        android:textColor="#ff0000"
-        android:textSize="26sp" />
+        android:textColor="#312929"
+        android:textSize="16sp" />
 </LinearLayout>

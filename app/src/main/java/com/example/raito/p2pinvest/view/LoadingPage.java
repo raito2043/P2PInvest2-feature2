@@ -29,7 +29,7 @@ public abstract class LoadingPage extends FrameLayout {
     private static final int STATE_ERROR = 2;
     private static final int STATE_EMPTY = 3;
     private static final int STATE_SUCCESS = 4;
-    private int state_current = STATE_SUCCESS;//每个状态都不同的一个变量,默认情况下为加载
+    private int state_current = STATE_LOADING;//每个状态都不同的一个变量,默认情况下为加载
     //四种显示界面
     private View view_loading;
     private View view_error;
@@ -109,7 +109,7 @@ public abstract class LoadingPage extends FrameLayout {
         //view_success
         if (view_success == null) {
             //加载view_success，非公共布局创建抽象方法待调用者实现
-            //view_success = UiUtils.getView(layoutId());
+            //view_success = UiUtils.getView(layoutId());context不对
             view_success = View.inflate(getContext(),layoutId(),null);
             //添加到frameLayout
             addView(view_success, layoutParams);

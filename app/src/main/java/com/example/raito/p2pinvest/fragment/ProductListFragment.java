@@ -1,6 +1,7 @@
 package com.example.raito.p2pinvest.fragment;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.example.raito.p2pinvest.R;
 import com.example.raito.p2pinvest.adapter.ProductAdapter;
+import com.example.raito.p2pinvest.adapter.ProductAdapter1;
 import com.example.raito.p2pinvest.bean.Product;
 import com.example.raito.p2pinvest.common.BaseFragment;
 import com.loopj.android.http.RequestParams;
@@ -28,11 +30,12 @@ import butterknife.Unbinder;
  */
 
 public class ProductListFragment extends BaseFragment {
-    @BindView(R.id.tv_list_product)
+    @BindView(R.id.tv_marquee_listProduct)
     TextView tvListProduct;
     @BindView(R.id.lv_list_product)
     ListView lvListProduct;
-    Unbinder unbinder;
+    private List<Product> listProduct;
+
 
     @Override
     protected RequestParams getParams() {
@@ -46,19 +49,18 @@ public class ProductListFragment extends BaseFragment {
 
     @Override
     protected void initData(String content, View view_success) {
-        //List<Product> listProduct = getListProductByParse(content);
-      List<String> list = new ArrayList<>();
-        list.add("s");
-        list.add("2");
-        list.add("3");
-        list.add("4");
-        list.add("s");
+
+       if(!TextUtils.isEmpty(content)){
+           listProduct = getListProductByParse(content);
+       }
+
+
 
 
 
         //设置数据适配器
-        lvListProduct.setAdapter(new ProductAdapter(list,getContext()));
-
+        lvListProduct.setAdapter(new ProductAdapter(listProduct,getContext()));
+        //lvListProduct.setAdapter(new ProductAdapter1(listProduct));
 
     }
 

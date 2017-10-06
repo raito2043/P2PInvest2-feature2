@@ -78,14 +78,14 @@ public abstract class BaseFragment extends android.support.v4.app.Fragment {
         super.onActivityCreated(savedInstanceState);
 
         //模拟联网操作的延迟
-      /*  UiUtils.getHandler().postDelayed(new Runnable() {
+      UiUtils.getHandler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 //视图加载好后加载数据
-
+                    loadingPager.show();
             }
-        }, 2000);*/
-        loadingPager.show();
+        }, 3000);
+
 
 
     }
@@ -106,7 +106,7 @@ public abstract class BaseFragment extends android.support.v4.app.Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        unbinde.unbind();
+        //unbinde.unbind();
 
     }
 }

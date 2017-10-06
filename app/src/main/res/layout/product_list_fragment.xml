@@ -5,7 +5,7 @@
     android:orientation="vertical">
 
     <com.example.raito.p2pinvest.view.MyTextView
-        android:id="@+id/tv_list_product"
+        android:id="@+id/tv_marquee_listProduct"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ellipsize="marquee"
