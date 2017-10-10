@@ -84,7 +84,7 @@ public abstract class BaseFragment extends android.support.v4.app.Fragment {
                 //视图加载好后加载数据
                     loadingPager.show();
             }
-        }, 3000);
+        }, 0);
 
 
 
@@ -103,10 +103,5 @@ public abstract class BaseFragment extends android.support.v4.app.Fragment {
     //获取布局
     public abstract int getLayoutId();
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        //unbinde.unbind();
 
-    }
 }

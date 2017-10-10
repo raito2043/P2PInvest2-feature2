@@ -6,7 +6,8 @@
 
     <color name="home_back_unselected">#676767</color>
     <color name="home_back_selected">#3883D1</color>
-    <color name="home_back_selected01">#E24242</color>
+    <color name="home_back_selected01">#ff5c5c</color>
+    <color name="home_back_main">#ff5c5c</color>
 
     <color name="title_back">#2F83C7</color>
 

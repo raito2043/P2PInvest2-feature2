@@ -13,4 +13,7 @@ public class Product {
     public String progress;
     public String suodingDays;
     public String yearRate;
+    public String money;
+
+
 }

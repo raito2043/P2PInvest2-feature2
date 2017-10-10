@@ -1,6 +1,7 @@
 package com.example.raito.p2pinvest.fragment;
 
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,7 @@ import com.example.raito.p2pinvest.R;
 import com.example.raito.p2pinvest.adapter.ProductAdapter;
 import com.example.raito.p2pinvest.adapter.ProductAdapter1;
 import com.example.raito.p2pinvest.bean.Product;
+import com.example.raito.p2pinvest.common.AppNetConfig;
 import com.example.raito.p2pinvest.common.BaseFragment;
 import com.loopj.android.http.RequestParams;
 
@@ -35,6 +37,7 @@ public class ProductListFragment extends BaseFragment {
     @BindView(R.id.lv_list_product)
     ListView lvListProduct;
     private List<Product> listProduct;
+    private boolean isNet = false;
 
 
     @Override
@@ -42,25 +45,23 @@ public class ProductListFragment extends BaseFragment {
         return null;
     }
 
-    @Override
+    @Override //AppNetConfig.PRODUCT
     protected String getUrl() {
-        return null;
+        return null ;
     }
 
     @Override
     protected void initData(String content, View view_success) {
 
-       if(!TextUtils.isEmpty(content)){
-           listProduct = getListProductByParse(content);
-       }
-
-
-
-
+        if (!TextUtils.isEmpty(content)) {
+            isNet = true;
+            listProduct = getListProductByParse(content);
+        }
 
         //设置数据适配器
-        lvListProduct.setAdapter(new ProductAdapter(listProduct,getContext()));
+        lvListProduct.setAdapter(new ProductAdapter(listProduct, getContext(),isNet));
         //lvListProduct.setAdapter(new ProductAdapter1(listProduct));
+
 
     }
 
@@ -94,5 +95,10 @@ public class ProductListFragment extends BaseFragment {
     public int getLayoutId() {
         return R.layout.product_list_fragment;
     }
+
+
+
+
+
 
 }

@@ -18,6 +18,7 @@ import com.example.raito.p2pinvest.utils.UiUtils;
 
 /**
  * Created by Raito on 2017/9/30.
+ *
  */
 
 public class RoundView extends View {
@@ -43,7 +44,8 @@ public class RoundView extends View {
     private float progress ;//圆环进度
     private Paint paint;
     private int width;
-    private String text = "00%";
+    private String text;
+
 
     public RoundView(Context context) {
         this(context, null);
@@ -63,10 +65,11 @@ public class RoundView extends View {
         roundColor = typedArray.getColor(R.styleable.RoundView_roundColor, Color.BLACK);
         roundProgressColor= typedArray.getColor(R.styleable.RoundView_roundProgressColor, Color.YELLOW);
         max= typedArray.getInteger(R.styleable.RoundView_max, 100);
-        progress = typedArray.getInteger(R.styleable.RoundView_progress, 10);
+        progress = typedArray.getInteger(R.styleable.RoundView_progress, 0);
         roundWidth =  typedArray.getDimension(R.styleable.RoundView_roundWidth, UiUtils.dp2px(10));
         textColor = typedArray.getColor(R.styleable.RoundView_textColor, Color.BLACK);
         textSize =  typedArray.getDimension(R.styleable.RoundView_textSize, UiUtils.dp2px(20));
+
 
         //3.回收处理
         typedArray.recycle();
@@ -88,8 +91,8 @@ public class RoundView extends View {
         this.progress = progress;
     }
 
-    public void setText(int progress){
-        //text = String.valueOf(progress) +"%";
+    public void setText(String text){
+        this.text = text;
     }
 
     //获取视图宽高
@@ -128,7 +131,8 @@ public class RoundView extends View {
         paint.setTextSize(textSize);
         paint.setStrokeWidth(0);
 
-
+        //3.绘制文本
+        String text = progress * 100 / max  + "%";
         @SuppressLint("DrawAllocation") Rect rect = new Rect();//创建一个矩形，此时矩形没有具体宽高
         paint.getTextBounds(text, 0, text.length(), rect);//此时text宽高为包裹内容 rect来储存text的数据
         int x = width / 2 - rect.width() / 2;

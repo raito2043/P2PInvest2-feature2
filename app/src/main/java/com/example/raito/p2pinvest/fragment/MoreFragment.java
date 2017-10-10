@@ -51,7 +51,8 @@ public class MoreFragment extends BaseFragment {
     //初始化title
     protected void initTitle() {
         imgPre.setVisibility(View.INVISIBLE);
-        imgSetting.setVisibility(View.INVISIBLE);
+        imgSetting.setVisibility(View.VISIBLE);
+        tvTitle.setText("更多");
     }
 
     @Override

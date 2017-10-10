@@ -4,9 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.raito.p2pinvest.fragment.HomeFragment">
-    <!--title-->
-    <include layout="@layout/common_title" />
+    tools:context="com.example.raito.p2pinvest.fragment.ItemHomeFragment">
+
+
     <!-- TODO: Update blank fragment layout -->
     <com.example.raito.p2pinvest.view.MyScrollView
         android:layout_width="match_parent"
@@ -111,7 +111,7 @@
                 roundview:roundWidth="8dp"
                 roundview:roundColor="#e2e2e2"
                 roundview:roundProgressColor="#ff1154"
-                roundview:progress="80"
+                roundview:progress="0"
                 roundview:max="100"
                 roundview:textSize="20sp"
                 roundview:textColor="@color/more_text"/>
@@ -132,7 +132,7 @@
                 android:layout_marginLeft="40dp"
                 android:layout_marginRight="40dp"
                 android:layout_marginTop="8dp"
-                android:background="@drawable/btn_bg"
+                android:background="@drawable/btn_home_selector"
                 android:text="立即加入"
                 android:textColor="#fff"
                 android:textSize="20sp" />

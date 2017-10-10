@@ -1,44 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="50dp"
-    android:background="#fff4fa"
-    >
+    android:background="#ffffff">
+
     <ImageView
         android:id="@+id/img_pre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/left"
+        android:layout_centerVertical="true"
         android:layout_marginLeft="16dp"
         android:layout_marginStart="16dp"
-        android:layout_centerVertical="true"/>
+        android:background="@drawable/left"
+        android:clickable="true"
+        android:visibility="invisible"/>
+
     <TextView
         android:id="@+id/tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-       android:layout_centerInParent="true"
-        android:textSize="20sp"
-        android:textColor="#ff2525"
-        android:text="首页"/>
+        android:layout_centerInParent="true"
+        android:text="首页"
+        android:textColor="#494949"
+        android:textSize="18sp"
+        tools:ignore="HardcodedText" />
+
     <ImageView
         android:id="@+id/img_setting"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/my_setting_icon"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="16dp"
         android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
         android:layout_marginEnd="16dp"
-        android:layout_centerVertical="true"/>
+        android:layout_marginRight="16dp"
+        android:background="@drawable/my_setting_icon"
+        android:clickable="true"
+        android:visibility="invisible"/>
+
+
+
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#dc2020"
+        android:layout_height="1px"
+        android:background="#d2d2d2"
         android:layout_alignParentBottom="true"/>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#50ffb7b7"/>
 
 
 </RelativeLayout>

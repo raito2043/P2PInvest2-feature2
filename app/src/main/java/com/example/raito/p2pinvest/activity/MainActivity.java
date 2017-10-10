@@ -1,14 +1,11 @@
 package com.example.raito.p2pinvest.activity;
 
 import android.annotation.SuppressLint;
-import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.Window;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -16,17 +13,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.raito.p2pinvest.R;
-import com.example.raito.p2pinvest.common.MyActivityManager;
+import com.example.raito.p2pinvest.common.BaseActivity;
 import com.example.raito.p2pinvest.fragment.HomeFragment;
 import com.example.raito.p2pinvest.fragment.MineFragment;
 import com.example.raito.p2pinvest.fragment.InvestFragment;
 import com.example.raito.p2pinvest.fragment.MoreFragment;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MainActivity extends FragmentActivity {
+public class MainActivity extends BaseActivity {
 
     private static final int WHAT_RESET_BACK = 0;
     @BindView(R.id.fl_main)
@@ -61,16 +57,21 @@ public class MainActivity extends FragmentActivity {
     private MoreFragment moreFragment;
     private FragmentTransaction begin;
 
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
-        //添加到栈
-        MyActivityManager.getInstance().add(this);
+    protected void initTitle() {
+
+    }
+
+    @Override
+    protected void initData() {
         //初始化显示home
         setFragment(0);
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_main;
     }
 
     @OnClick({R.id.ll_home, R.id.ll_invest, R.id.ll_mine, R.id.ll_more})
@@ -154,8 +155,8 @@ public class MainActivity extends FragmentActivity {
     }
 
     //设置非点击字体颜色和图片
-    private void setTextColorAndImg(int i ) {
-        switch(i){
+    private void setTextColorAndImg(int i) {
+        switch (i) {
 
             case 0:
                 //改变图片和字体颜色
@@ -204,35 +205,37 @@ public class MainActivity extends FragmentActivity {
     }
 
     @SuppressLint("HandlerLeak")//非静态handler 有可能会泄露
-    private Handler handler = new Handler(){
+    private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            switch(msg.what){
+            switch (msg.what) {
                 case WHAT_RESET_BACK:
                     flag = true;
                     break;
             }
         }
     };
-    private   boolean flag =true;
+    private boolean flag = true;
+
     //两次返回键退出
     @Override
     public boolean onKeyUp(int keyCode, KeyEvent event) {
 
         //第一次进入
-        if(keyCode==KeyEvent.KEYCODE_BACK&&flag){
+        if (keyCode == KeyEvent.KEYCODE_BACK && flag) {
             //第二次不进入
             flag = false;
             //如果两秒之内没有下一步操作将flag设置回true
             Toast.makeText(this, "再按一下退出", Toast.LENGTH_SHORT).show();
-            handler.sendEmptyMessageDelayed(WHAT_RESET_BACK,2000);
+            handler.sendEmptyMessageDelayed(WHAT_RESET_BACK, 2000);
             return true;
 
         }
         return super.onKeyUp(keyCode, event);//返回父类退出程序
 
     }
+
     //为了避免内存泄露，在onDestroy中移除所有未被调用的消息
     @Override
     protected void onDestroy() {

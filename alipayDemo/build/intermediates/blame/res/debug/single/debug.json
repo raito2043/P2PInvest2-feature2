@@ -1,0 +1,22 @@
+[
+    {
+        "merged": "F:\\android_project\\P2PInvest2\\alipayDemo\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_msp_icon.png.flat",
+        "source": "F:\\android_project\\P2PInvest2\\alipayDemo\\src\\main\\res\\drawable-hdpi\\msp_icon.png"
+    },
+    {
+        "merged": "F:\\android_project\\P2PInvest2\\alipayDemo\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_msp_demo_title_bg.png.flat",
+        "source": "F:\\android_project\\P2PInvest2\\alipayDemo\\src\\main\\res\\drawable-hdpi\\msp_demo_title_bg.png"
+    },
+    {
+        "merged": "F:\\android_project\\P2PInvest2\\alipayDemo\\build\\intermediates\\res\\merged\\debug\\layout_pay_external.xml.flat",
+        "source": "F:\\android_project\\P2PInvest2\\alipayDemo\\src\\main\\res\\layout\\pay_external.xml"
+    },
+    {
+        "merged": "F:\\android_project\\P2PInvest2\\alipayDemo\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_msp_demo_title.png.flat",
+        "source": "F:\\android_project\\P2PInvest2\\alipayDemo\\src\\main\\res\\drawable-hdpi\\msp_demo_title.png"
+    },
+    {
+        "merged": "F:\\android_project\\P2PInvest2\\alipayDemo\\build\\intermediates\\res\\merged\\debug\\layout_pay_main.xml.flat",
+        "source": "F:\\android_project\\P2PInvest2\\alipayDemo\\src\\main\\res\\layout\\pay_main.xml"
+    }
+]

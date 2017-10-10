@@ -16,7 +16,6 @@ import butterknife.ButterKnife;
 
 /**
  * Created by Raito on 2017/10/6.
- *
  */
 
 public class ProductAdapter1 extends MyBaseAdapter<Product> {//泛型适配 MyBaseAdapter<Product>
@@ -40,7 +39,7 @@ public class ProductAdapter1 extends MyBaseAdapter<Product> {//泛型适配 MyBa
         if (list != null && list.size() > 0) {
 
             //设置数据
-            Product product =  list.get(position);
+            Product product = list.get(position);
             viewHolder.titleItemListProduct.setText(product.name);
             viewHolder.tvDaysItemListProduct.setText(product.suodingDays);
             viewHolder.tvMemberItemListProduct.setText(product.memberNum);
@@ -53,7 +52,6 @@ public class ProductAdapter1 extends MyBaseAdapter<Product> {//泛型适配 MyBa
         return convertView;
 
 
-
     }
 
     static class ViewHolder {
@@ -61,8 +59,6 @@ public class ProductAdapter1 extends MyBaseAdapter<Product> {//泛型适配 MyBa
         TextView titleItemListProduct;
         @BindView(R.id.arrow_item_listProduct)
         ImageView arrowItemListProduct;
-        @BindView(R.id.tv_sum_item_listProduct)
-        TextView tvSumItemListProduct;
         @BindView(R.id.tv_rate_item_listProduct)
         TextView tvRateItemListProduct;
         @BindView(R.id.tv_days_item_listProduct)

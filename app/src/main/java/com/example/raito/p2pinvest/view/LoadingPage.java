@@ -166,7 +166,8 @@ public abstract class LoadingPage extends FrameLayout {
             public void onFailure(Throwable error, String content) {
                 super.onFailure(error, content);
                 //state_current = STATE_ERROR;
-                resultState = ResultState.ERROR;
+                //resultState = ResultState.ERROR;
+                resultState = ResultState.SUCCESS;
                 resultState.setContent("");//避免出现空指针
                 //showSafePage();
                 //根据枚举类值设置选择加载布局

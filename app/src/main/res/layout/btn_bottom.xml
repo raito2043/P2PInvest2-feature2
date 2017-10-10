@@ -3,16 +3,13 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:background="#fff4fa"
+    android:background="#ffffff"
         >
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#50ffb7b7"/>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#c62828"/>
+        android:layout_height="1px"
+        android:background="#d2d2d2"/>
+
     <LinearLayout
 
         android:layout_marginTop="6dp"
@@ -31,12 +28,12 @@
             android:layout_weight="1">
             <ImageView
                 android:id="@+id/img_home"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:background="@drawable/home_selector"/>
             <TextView
                 android:id="@+id/tv_home"
-                android:layout_marginTop="2dp"
+                android:layout_marginTop="4dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="首页"/>
@@ -51,12 +48,12 @@
             android:layout_weight="1">
             <ImageView
                 android:id="@+id/img_invest"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:background="@drawable/bottom03"/>
             <TextView
                 android:id="@+id/tv_invest"
-                android:layout_marginTop="2dp"
+                android:layout_marginTop="4dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="借贷"/>
@@ -71,12 +68,12 @@
             android:layout_weight="1">
             <ImageView
                 android:id="@+id/img_mine"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:background="@drawable/bottom05"/>
             <TextView
                 android:id="@+id/tv_mine"
-                android:layout_marginTop="2dp"
+                android:layout_marginTop="4dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="我的资产"/>
@@ -91,12 +88,12 @@
             android:layout_weight="1">
             <ImageView
                 android:id="@+id/img_more"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:background="@drawable/bottom07"/>
             <TextView
                 android:id="@+id/tv_more"
-                android:layout_marginTop="2dp"
+                android:layout_marginTop="4dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="更多"/>
