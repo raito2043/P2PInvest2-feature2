@@ -33,9 +33,7 @@
         android:theme="@style/AppThemeprice">
         <activity
             android:name=".activity.MainActivity"
-            android:launchMode="standard">
-
-        </activity>
+            android:launchMode="standard"></activity>
         <activity
             android:name=".activity.WelcomeActivity"
             android:label="@string/title_activity_welcome"
@@ -50,10 +48,8 @@
         <activity
             android:name=".activity.LoginActivity"
             android:label="@string/title_activity_login"
-            android:theme="@style/AppThemeprice.NoActionBar">
-
-        </activity>
-        <!--支付宝集成-->
+            android:theme="@style/AppThemeprice.NoActionBar"></activity>
+        <!-- 支付宝集成 -->
         <activity
             android:name="com.alipay.sdk.app.H5PayActivity"
             android:configChanges="orientation|keyboardHidden|navigation"
@@ -66,6 +62,9 @@
             android:screenOrientation="behind" />
         <activity android:name=".activity.RechargeActivity" />
         <activity android:name=".activity.UserInfoActivity" />
+        <activity android:name=".activity.RegisterActivity" />
+
+
     </application>
 
 </manifest>

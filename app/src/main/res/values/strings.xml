@@ -10,4 +10,5 @@
         <item>热门理财</item>
     </string-array>
     <string name="title_activity_login">LoginActivity</string>
+    <string name="title_activity_regist">RegistActivity</string>
 </resources>
