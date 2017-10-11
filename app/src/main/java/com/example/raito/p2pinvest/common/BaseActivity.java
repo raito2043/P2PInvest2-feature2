@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import android.support.v4.app.FragmentActivity;
+import android.text.TextUtils;
 import android.view.Window;
 
 
@@ -91,5 +92,21 @@ public abstract class BaseActivity extends FragmentActivity {
         user.setCredit(sp.getBoolean("iscredit", false));
         user.setPhone(sp.getString("phone", ""));
         return user;
+    }
+
+
+    //移除用户信息
+    public void removeUserInfo() {
+        SharedPreferences sp = getSharedPreferences("user_info", Context.MODE_PRIVATE);
+        final SharedPreferences.Editor editor = sp.edit();
+        String name = sp.getString("name", null);
+        if (!TextUtils.isEmpty(name)) {
+            sp.edit().remove("user_info").apply();
+            editor.remove("name");
+            editor.remove("imageurl");
+            editor.remove("iscredit");
+            editor.remove("phone");
+        }
+        editor.apply();
     }
 }

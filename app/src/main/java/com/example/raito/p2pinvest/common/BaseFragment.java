@@ -1,6 +1,7 @@
 package com.example.raito.p2pinvest.common;
 
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -26,7 +27,6 @@ public abstract class BaseFragment extends android.support.v4.app.Fragment {
 
     private LoadingPage loadingPager;
     private Unbinder unbinde;
-
 
     //加载视图
     @Override

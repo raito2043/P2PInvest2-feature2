@@ -8,6 +8,7 @@ import android.content.ContentUris;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -17,14 +18,17 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.raito.p2pinvest.R;
 import com.example.raito.p2pinvest.common.BaseActivity;
+import com.example.raito.p2pinvest.fragment.MineFragment;
 import com.example.raito.p2pinvest.utils.BitmapUtils;
 
 import java.io.File;
@@ -57,6 +61,7 @@ public class UserInfoActivity extends BaseActivity {
     Button btnUserLogout;
     private Intent picture;
 
+
     @Override
     protected void initTitle() {
 
@@ -65,7 +70,20 @@ public class UserInfoActivity extends BaseActivity {
     @Override
     protected void initData() {
 
+        btnUserLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //移除用户信息
+                removeUserInfo();
+                //Toast.makeText(UserInfoActivity.this, "退出成功", Toast.LENGTH_SHORT).show();
+                new MainActivity().setTextColorAndImg(2);
+                goToActivity(MineFragment.class,null);
+                finish();
+            }
+        });
     }
+
+
 
     @Override
     protected int getLayoutId() {
@@ -140,7 +158,7 @@ public class UserInfoActivity extends BaseActivity {
             //这里返回的uri情况就有点多了
             //在4.4.2之前返回的uri是:content://media/external/images/media/3951或者file://....
             // 在4.4.2返回的是content://com.android.providers.media.documents/document/image
-            Log.i("s", "返回数据" + uri+"----"+uri1);
+            Log.i("s", "返回数据" + uri + "----" + uri1);
 
             String pathResult = getPath(uri);//不同系统下获取uri地址 /external/images/media/24
             //String pathResult1 = uri.getPath();

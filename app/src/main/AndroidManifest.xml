@@ -63,6 +63,8 @@
         <activity android:name=".activity.RechargeActivity" />
         <activity android:name=".activity.UserInfoActivity" />
         <activity android:name=".activity.RegisterActivity" />
+        <activity android:name=".activity.GestureEditActivity" />
+        <activity android:name=".activity.GestureVerifyActivity" />
 
 
     </application>

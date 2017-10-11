@@ -1,9 +1,16 @@
 package com.example.raito.p2pinvest.activity;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -56,6 +63,8 @@ public class MainActivity extends BaseActivity {
     private InvestFragment investFragment;
     private MoreFragment moreFragment;
     private FragmentTransaction begin;
+    private SharedPreferences sp;
+    private FragmentManager fragmentManager;
 
 
     @Override
@@ -65,9 +74,37 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initData() {
+
+        sp = getSharedPreferences("secret_protect", Context.MODE_PRIVATE);
+
+
         //初始化显示home
         setFragment(0);
+        //跳转Fragment
+        activityToFragment();
     }
+
+    private void activityToFragment() {
+        Intent intent = getIntent();
+        int id = intent.getIntExtra("flag", -1);
+        if (id > 0) {
+            Log.i("s", "传递的值");
+
+            if (id == 1) {
+                setFragment(2);
+
+//                if (mineFragment == null) {//不重建 如果有就复用
+//                    //commit之后才会调用生命周期
+//                    mineFragment = new MineFragment();
+//                    begin.add(R.id.fl_main, mineFragment);//添加到容器
+//                }
+//                begin.show(mineFragment);//如果不为空直接show
+//                //改变图片和字体颜色
+//                setTextColorAndImg(2); //这里是指定跳转到指定的fragment
+            }
+        }
+    }
+
 
     @Override
     protected int getLayoutId() {
@@ -87,7 +124,25 @@ public class MainActivity extends BaseActivity {
                 //Toast.makeText(this, "home", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.ll_mine:
-                setFragment(2);
+                String inputCode = sp.getString("inputCode", null);
+                boolean isChecked = sp.getBoolean("isChecked", false);
+                if (isChecked && !TextUtils.isEmpty(inputCode)) {
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("request",1);
+
+                    goToActivity(GestureVerifyActivity.class,bundle);
+//                    //延迟加载界面
+//                    new Handler().postDelayed(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            setFragment(2);
+//                        }
+//                    },200);
+
+                } else {
+                    setFragment(2);
+                }
+
                 //Toast.makeText(this, "home", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.ll_more:
@@ -100,7 +155,7 @@ public class MainActivity extends BaseActivity {
     //设置fragment
     private void setFragment(int i) {
 
-        android.support.v4.app.FragmentManager fragmentManager = this.getSupportFragmentManager();
+        fragmentManager = this.getSupportFragmentManager();
         begin = fragmentManager.beginTransaction();
         //隐藏不必要的显示
         hideFragment();
@@ -127,6 +182,8 @@ public class MainActivity extends BaseActivity {
                 tvInvest.setTextColor(getResources().getColor(R.color.home_back_selected));//通过获取颜色id获得相应的值
                 break;
             case 2:
+
+
                 if (mineFragment == null) {//不重建 如果有就复用
                     //commit之后才会调用生命周期
                     mineFragment = new MineFragment();
@@ -155,7 +212,7 @@ public class MainActivity extends BaseActivity {
     }
 
     //设置非点击字体颜色和图片
-    private void setTextColorAndImg(int i) {
+    public void setTextColorAndImg(int i) {
         switch (i) {
 
             case 0:
@@ -246,7 +303,7 @@ public class MainActivity extends BaseActivity {
         handler.removeCallbacksAndMessages(null);//为null就为所有的都被移除
 
     }
-
+    //隐藏fragment
     private void hideFragment() {
         if (homeFragment != null) {
             begin.hide(homeFragment);

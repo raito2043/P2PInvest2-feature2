@@ -61,6 +61,7 @@ public class MineFragment extends BaseFragment {
     TextView llZichan;
     Unbinder unbinder;
     private boolean isLogin = false; //是否登录
+    private String name;
 
     @Override
     protected RequestParams getParams() {
@@ -84,7 +85,7 @@ public class MineFragment extends BaseFragment {
     private void isLogin() {
         //查看本地是否有用户的登录信息
         SharedPreferences sp = this.getActivity().getSharedPreferences("user_info", Context.MODE_PRIVATE);
-        String name = sp.getString("name", "");
+        name = sp.getString("name", "");
         if (TextUtils.isEmpty(name)) {
             //本地没有保存过用户信息，点击任意有关需要登录的操作时 跳转登录页登录，每个需要登录的操作都要判断isLogin是否为true；
             isLogin = false;
@@ -109,10 +110,10 @@ public class MineFragment extends BaseFragment {
             @Override
             public Bitmap transform(Bitmap source) {
                 //图片压缩 图片大小可以动态获取
-                Bitmap bitmap = BitmapUtils.zoom(source, UiUtils.dp2px(62),UiUtils.dp2px(62));
+                //Bitmap bitmap = BitmapUtils.zoom(source, UiUtils.dp2px(62),UiUtils.dp2px(62));
 
                 //圆形工具类
-                bitmap = BitmapUtils.circleBitmap(bitmap);
+                Bitmap bitmap = BitmapUtils.circleBitmap(source);
                 bitmap.recycle();//回收bitmap资源，这里只负责处理 ，处理完用的不是此bitmap，所以回收掉
                 return bitmap;
             }
@@ -149,32 +150,38 @@ public class MineFragment extends BaseFragment {
 
     @OnClick({R.id.img_pre, R.id.img_setting, R.id.iv_me_icon, R.id.rl_me_icon, R.id.tv_me_name, R.id.rl_me, R.id.recharge, R.id.withdraw, R.id.ll_touzi, R.id.ll_touzi_zhiguan, R.id.ll_zichan})
     public void onViewClicked(View view) {
-//        if (!isLogin) {//未登录跳转登录界面
-//            Intent intent = new Intent(getContext(), LoginActivity.class);
-//            startActivity(intent);
-//        }
-        switch (view.getId()) {
-            case R.id.iv_me_icon:
-                ((BaseActivity)this.getActivity()).goToActivity(UserInfoActivity.class,null);
-                break;
-            case R.id.rl_me_icon:
-                break;
-            case R.id.tv_me_name:
-                break;
-            case R.id.rl_me:
-                break;
-            case R.id.recharge:
-                //进入充值界面
-                ((BaseActivity)this.getActivity()).goToActivity(RechargeActivity.class,null);
-                break;
-            case R.id.withdraw:
-                break;
-            case R.id.ll_touzi:
-                break;
-            case R.id.ll_touzi_zhiguan:
-                break;
-            case R.id.ll_zichan:
-                break;
+
+        if (TextUtils.isEmpty(name)) {//未登录跳转登录界面
+            Intent intent = new Intent(getContext(), LoginActivity.class);
+            startActivity(intent);
+        }else{
+
+            switch (view.getId()) {
+                case R.id.iv_me_icon:
+                    ((BaseActivity)this.getActivity()).goToActivity(UserInfoActivity.class,null);
+                    break;
+                case R.id.rl_me_icon:
+                    break;
+                case R.id.tv_me_name:
+                    break;
+                case R.id.rl_me:
+                    break;
+                case R.id.recharge:
+                    //进入充值界面
+                    ((BaseActivity)this.getActivity()).goToActivity(RechargeActivity.class,null);
+                    break;
+                case R.id.withdraw:
+                    break;
+                case R.id.ll_touzi:
+                    break;
+                case R.id.ll_touzi_zhiguan:
+                    break;
+                case R.id.ll_zichan:
+                    break;
+            }
         }
+
     }
+
+
 }
