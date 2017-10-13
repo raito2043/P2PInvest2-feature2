@@ -11,4 +11,6 @@
     </string-array>
     <string name="title_activity_login">LoginActivity</string>
     <string name="title_activity_regist">RegistActivity</string>
+    <string name="title_activity_feedback">feedbackActivity</string>
+    <string name="title_activity_withdraw_cash">WithdrawCashActivity</string>
 </resources>

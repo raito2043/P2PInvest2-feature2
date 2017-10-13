@@ -2,14 +2,15 @@ package com.example.raito.p2pinvest.fragment;
 
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -18,6 +19,7 @@ import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.example.raito.p2pinvest.R;
+import com.example.raito.p2pinvest.activity.FeedbackActivity;
 import com.example.raito.p2pinvest.activity.GestureEditActivity;
 import com.example.raito.p2pinvest.activity.GestureVerifyActivity;
 import com.example.raito.p2pinvest.activity.RegisterActivity;
@@ -26,9 +28,7 @@ import com.example.raito.p2pinvest.common.BaseFragment;
 import com.loopj.android.http.RequestParams;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -61,6 +61,7 @@ public class MoreFragment extends BaseFragment {
 
     private SharedPreferences sp;
     private SharedPreferences.Editor editor;
+    private String number;
 
     public MoreFragment() {
         // Required empty public constructor
@@ -183,10 +184,24 @@ public class MoreFragment extends BaseFragment {
 
                 break;
             case R.id.rl_more_contact:
+                number = tvMorePhone.getText().toString().trim();
+                new AlertDialog.Builder(MoreFragment.this.getActivity())
+                        .setTitle("联系客服")
+                        .setMessage("联系客服101-16564888")
+                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                //联系客服
+                                callCustomService();
+                            }
+                        }).setNegativeButton("取消",null).show();
 
                 break;
             case R.id.tv_more_fankui:
-                //联系客服
+                //反馈
+                ((BaseActivity)MoreFragment.this.getActivity()).goToActivity(FeedbackActivity.class,null);
+
+
                 break;
             case R.id.tv_more_share:
                 //分享
@@ -195,5 +210,12 @@ public class MoreFragment extends BaseFragment {
                 //关于
                 break;
         }
+    }
+
+    private void callCustomService() {
+        Intent intent = new Intent(Intent.ACTION_CALL);
+        intent.setData(Uri.parse("tel:"+number));
+        startActivity(intent);
+
     }
 }

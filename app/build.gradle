@@ -40,4 +40,5 @@ dependencies {
     implementation files('libs/alipaysecsdk.jar')
     implementation files('libs/alipayutdid.jar')
     implementation project(':GestureLock')
+    implementation project(':MPChartLib')
 }

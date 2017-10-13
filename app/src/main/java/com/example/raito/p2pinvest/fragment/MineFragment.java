@@ -12,9 +12,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.raito.p2pinvest.R;
+import com.example.raito.p2pinvest.activity.BarChartActivity;
+import com.example.raito.p2pinvest.activity.LineChartActivity;
 import com.example.raito.p2pinvest.activity.LoginActivity;
+
+import com.example.raito.p2pinvest.activity.PinChartActivity;
 import com.example.raito.p2pinvest.activity.RechargeActivity;
 import com.example.raito.p2pinvest.activity.UserInfoActivity;
+import com.example.raito.p2pinvest.activity.WithdrawCashActivity;
 import com.example.raito.p2pinvest.bean.User;
 import com.example.raito.p2pinvest.common.BaseActivity;
 import com.example.raito.p2pinvest.common.BaseFragment;
@@ -151,7 +156,7 @@ public class MineFragment extends BaseFragment {
     @OnClick({R.id.img_pre, R.id.img_setting, R.id.iv_me_icon, R.id.rl_me_icon, R.id.tv_me_name, R.id.rl_me, R.id.recharge, R.id.withdraw, R.id.ll_touzi, R.id.ll_touzi_zhiguan, R.id.ll_zichan})
     public void onViewClicked(View view) {
 
-        if (TextUtils.isEmpty(name)) {//未登录跳转登录界面
+        if (!TextUtils.isEmpty(name)) {//未登录跳转登录界面
             Intent intent = new Intent(getContext(), LoginActivity.class);
             startActivity(intent);
         }else{
@@ -171,12 +176,16 @@ public class MineFragment extends BaseFragment {
                     ((BaseActivity)this.getActivity()).goToActivity(RechargeActivity.class,null);
                     break;
                 case R.id.withdraw:
+                    ((BaseActivity)this.getActivity()).goToActivity(WithdrawCashActivity.class,null);
                     break;
                 case R.id.ll_touzi:
+                    ((BaseActivity)this.getActivity()).goToActivity(LineChartActivity.class,null);
                     break;
                 case R.id.ll_touzi_zhiguan:
+                    ((BaseActivity)this.getActivity()).goToActivity(BarChartActivity.class,null);
                     break;
                 case R.id.ll_zichan:
+                    ((BaseActivity)this.getActivity()).goToActivity(PinChartActivity.class,null);
                     break;
             }
         }

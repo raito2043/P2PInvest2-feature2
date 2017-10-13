@@ -3,11 +3,14 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="commit_false">#181818</color>
+    <color name="commit_true">#000000</color>
 
     <color name="home_back_unselected">#676767</color>
     <color name="home_back_selected">#3883D1</color>
     <color name="home_back_selected01">#ff5c5c</color>
     <color name="home_back_main">#ff5c5c</color>
+    <color name="text_main">#4f5151</color>
 
     <color name="title_back">#2F83C7</color>
 
